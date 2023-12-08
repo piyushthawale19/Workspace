@@ -1,0 +1,196 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+ int data;
+ struct node *next;
+};
+struct node *head,*ptr,*temp,*head,*temp1;
+void insert_begin();
+void insert_last();
+void delete_begin();
+void delete_last();
+void search();
+void display();
+void main()
+{
+ int ch;
+ while(1)
+ {
+ printf("\n1. insert at begin\n2.insert at last\n3.delete at begin\n4.delete atlast\n5.search\n6.display\n7.exit\n");
+ printf("enter your choice\n");
+ scanf("%d",&ch);
+ switch(ch)
+ {
+ case 1:insert_begin();
+ break;
+ case 2:insert_last();
+ break;
+ case 3:delete_begin();
+ break;
+ case 4:delete_last();
+ break;
+ case 5:search();
+ break;
+ case 6:display();
+ break;
+ case 7:exit(0);
+ break;
+ default:printf("invalid choice");
+ }
+ }
+}
+void insert_begin()
+{
+ ptr=(struct node*)malloc(sizeof(struct node));
+ if(ptr==NULL)
+ {
+ printf("memory is not allocated\n");
+ }
+ else
+ {
+ printf("enter the value\n");
+ scanf("%d",&ptr->data);
+ if(head==NULL)
+ {
+ head=ptr;
+ ptr->next=head;
+ }
+ else
+ {
+ temp=head;
+ while(temp->next!=head)
+ {
+ temp=temp->next;
+ }
+ ptr->next=head;
+ temp->next=ptr;
+ head=ptr;
+ }
+ }
+ printf("node is inserted\n");
+}
+void insert_last()
+{
+ ptr = (struct node*)malloc(sizeof(struct node));
+ if(ptr == NULL)
+ {
+ printf("memory is not allocated");
+ return;
+ }
+ printf("enter the value: ");
+ scanf("%d", &ptr->data);
+ if(head == NULL)
+ {
+ head = ptr;
+ ptr->next = head;
+ }
+ else
+ {
+ temp = head;
+ while(temp->next != head)
+ {
+ temp = temp->next;
+ }
+ temp->next = ptr;
+ ptr->next = head;
+ }
+ printf("node is inserted\n");
+}
+void delete_begin()
+{
+ if(head == NULL)
+{
+ printf("\nUNDERFLOW");
+}
+else if(head->next == head)
+{
+ head = NULL;
+ free(head);
+ printf("\nnode deleted\n");
+}
+else
+{
+ ptr = head;
+ while(ptr -> next != head)
+ ptr = ptr -> next;
+ ptr->next = head->next;
+ free(head);
+ head = ptr->next;
+ printf("\n node deleted\n");
+}
+}
+void delete_last()
+{
+ if (head==NULL)
+ {
+ printf("linkedlist is empty\n");
+ }
+ else if (head->next==head)
+ {
+ printf("%d is deleted",head->data);
+ free(head);
+ }
+ else
+ {
+ temp=head;
+ while(temp->next!=head)
+ {
+ temp1=temp;
+ temp=temp->next;
+ }
+ temp1->next=head;
+ temp->next=NULL;
+ printf("%d is deleted",temp->data);
+ free(temp);
+ }
+ printf("\n node is deleted");
+}
+void search()
+{
+ int val,i=0,flag=0;
+ temp = head;
+if(head == NULL)
+{
+ printf("\nEmpty List\n");
+}
+else
+{
+ printf("\nEnter item which you want to search?\n");
+ scanf("%d",&val);
+ while(temp!=head)
+ {
+ if(temp->data == val)
+ {
+ printf("item found at location %d",val);
+ }
+ else
+ {
+ flag=1;
+ }
+ i++;
+ temp=temp->next;
+ }
+ if(flag==1)
+ {
+ printf("value is not found");
+ }
+}
+}
+void display()
+{
+ ptr = head;
+ if (head == NULL)
+ {
+ printf("\nnothing to print");
+ }
+ else
+ {
+ printf("\n printing values ... \n");
+ do
+ {
+ printf("\n%d", ptr->data);
+ ptr = ptr->next;
+ } while (ptr != head);
+ }
+}

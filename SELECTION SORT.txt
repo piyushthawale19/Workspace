@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdlib.h>
+void selection_sort(int a[],int n);
+void display(int a[], int n);
+int a[10], n;
+int main()
+{
+ int i,ch;
+ printf("\n enter how many elements u want to insert: ");
+ scanf("%d",&n);
+ printf("\n enter the elements: ");
+ for(i=0;i<n;i++)
+ {
+ scanf("%d",&a[i]);
+ }
+ while(1)
+ {
+ printf("\n1. Sort array");
+ printf("\n2. display sorted array");
+ printf("\n3. exit");
+ printf("\n Enter your choice: ");
+ scanf("%d", &ch);
+ switch(ch)
+ {
+case 1: selection_sort(a,n);
+printf("\n array is sorted: ");
+break;
+case 2: display(a,n);
+break;
+case 3: exit(0);
+default: printf("\n wrong choice: ");
+ }
+ }
+ // getch();
+}
+void selection_sort(int a[], int n)
+{
+ int i,j,small, temp;
+ for(i=0;i<n-1;i++)
+ {
+ small=i;
+ for(j=i+1;j<n;j++)
+ {
+if(a[j]<a[small])
+{
+ small=j;
+}
+ }
+ temp=a[small];
+ a[small]=a[i];
+ a[i]=temp;
+ }
+}
+void display(int a[], int n)
+{
+ int i;
+ printf("\n sorted array is: ");
+ for(i=0;i<n;i++)
+ {
+ printf("\n %d",a[i]);
+ }
+}
